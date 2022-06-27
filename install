@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+    echo "You must have root priviledges to install!"
+    exit 1
+fi
+
+DIRLibraryOutput=/usr/lib/terminal
+DIRHeaderOutput=/usr/include/terminal
+
+if [[ ! -d "$DIRLibraryOutput" ]]; then
+    echo "- Creating /usr/lib/terminal"
+    mkdir /usr/lib/terminal
+fi
+if [[ ! -d "$DIRHeaderOutput" ]]; then
+    echo "- Creating /usr/include/terminal"
+    mkdir /usr/include/terminal
+fi
+if [[ ! -e "$DIRHeaderOutput/terminal.hpp" ]]; then
+    echo "- Installing header file"
+    cp include/terminal.hpp ${DIRHeaderOutput}/
+fi
+if [[ ! -e "$DIRLibraryOutput/libterminal.so" ]]; then
+    echo '- Installing shared library file'
+    cp build/libterminal.so ${DIRLibraryOutput}/
+fi
+
+echo "Updating LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH=/usr/lib/terminal:$LD_LIBRARY_PATH
+
+echo "-- Done!"
