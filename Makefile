@@ -17,8 +17,18 @@ clean:
 	rm -rf build
 
 install: terminal.so
-	install -d terminal $(PREFIX)lib/
-	install -d terminal $(PREFIX)include/
-	install -m 644 build/libterminal.so $(PREFIX)lib/terminal/
-	install -m 644 include/terminal.hpp $(PREFIX)include/terminal/ 	
-	export LD_LIBRARY_PATH=/usr/lib/terminal:$LD_LIBRARY_PATH
+	if [ -d "$(PREFIX)lib/terminal" ]; then \
+		install -m 644 build/libterminal.so $(PREFIX)lib/terminal; \
+	else \
+		mkdir $(PREFIX)lib/terminal; \
+		install -m 644 build/libterminal.so $(PREFIX)lib/terminal; \
+	fi
+
+	if [ -d "$(PREFIX)include/terminal" ]; then \
+		install -m 644 include/terminal.hpp $(PREFIX)include/terminal; \
+	else \
+		mkdir $(PREFIX)include/terminal; \
+		install -m 644 include/terminal.hpp $(PREFIX)include/terminal; \
+	fi
+
+	export LD_LIBRARY_PATH=/usr/lib/terminal:$$LD_LIBRARY_PATH

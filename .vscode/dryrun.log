@@ -1,6 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/orion/git/terminal'
-mkdir build
+mkdir build 
 g++ -Wall -shared -fpic  -o build/libterminal.so src/libterminal.cpp
 make: Leaving directory '/home/orion/git/terminal'
  
