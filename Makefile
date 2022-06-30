@@ -1,34 +1,29 @@
 C=g++
-FLAGS=-Wall -shared -fpic 
-
-ifeq ($(PREFIX),)
-		PREFIX:=/usr/
-endif
+FLAGS=-Wall -shared -fpic
+LOCAL:=0
 	
 .PHONY: install
 
-all: terminal.so
-	
+all: setup terminal.so
+
+setup: clean 
+	@mkdir build
+
+ifeq ($(LOCAL),1)
+	@mkdir shared
+endif
+
 terminal.so: src/libterminal.cpp
-	mkdir build 
+ifeq ($(LOCAL),1)
+	$(C) $(FLAGS) -o shared/libterminal.so src/libterminal.cpp
+else
 	$(C) $(FLAGS) -o build/libterminal.so src/libterminal.cpp
+endif
+
 
 clean:
-	rm -rf build
+	@rm -rf build
+	@rm -rf shared
+	@rm -f *.o
+	@rm -f *.so
 
-install: terminal.so
-	if [ -d "$(PREFIX)lib/terminal" ]; then \
-		install -m 644 build/libterminal.so $(PREFIX)lib/terminal; \
-	else \
-		mkdir $(PREFIX)lib/terminal; \
-		install -m 644 build/libterminal.so $(PREFIX)lib/terminal; \
-	fi
-
-	if [ -d "$(PREFIX)include/terminal" ]; then \
-		install -m 644 include/terminal.hpp $(PREFIX)include/terminal; \
-	else \
-		mkdir $(PREFIX)include/terminal; \
-		install -m 644 include/terminal.hpp $(PREFIX)include/terminal; \
-	fi
-
-	export LD_LIBRARY_PATH=/usr/lib/terminal:$$LD_LIBRARY_PATH
