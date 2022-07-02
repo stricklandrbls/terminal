@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DIRINCLUDE=/usr/include/terminal
+DIRLIB=/usr/lib/terminal
+
+if [ -f "$DIRINCLUDE/terminal.hpp" ]; then
+    rm -rf $DIRINCLUDE/terminal.hpp
+fi
+if [ -f "$DIRLIB/libterminal.so" ]; then
+    rm -rf $DIRLIB/libterminal.so
+fi
+if [ -f "/usr/lib/libterminal.so" ]; then
+    rm -rf /usr/lib/libterminal.so
+fi
