@@ -2,7 +2,7 @@ C=g++
 FLAGS=-Wall -shared -fpic
 LOCAL:=0
 VERSION=0.0
-PACKAGE=terminal_$(VERSION)_amd64
+PACKAGE=libterminal_$(VERSION)_amd64
 PACKAGELIBDIR=$(PACKAGE)/usr/lib/terminal
 PACKAGEINCLUDEDIR=$(PACKAGE)/usr/include/terminal
 

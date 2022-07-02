@@ -1,4 +1,4 @@
-#include <terminal.hpp>
+#include <terminal/terminal.hpp>
 
 int main(){
     Terminal::print(Terminal::success, "This worked!");
