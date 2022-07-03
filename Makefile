@@ -46,7 +46,7 @@ clean:
 	@rm -f *.deb
 
 test: setup src/test.cpp
-	$(C) -Wall src/test.cpp -o build/$@ -lterminal
+	$(C) -Wall src/libterminal.cpp src/test.cpp -o build/$@
 
 install:
 	
