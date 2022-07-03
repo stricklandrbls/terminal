@@ -5,6 +5,7 @@
 namespace Terminal{
 
     std::time_t     timestamp;
+	std::tm* 		formattedTime;
 	std::unique_ptr<FileLogger> logger;
 
 	void init_logger(std::string&& filename, std::filesystem::path&& storagePath){
@@ -39,9 +40,11 @@ namespace Terminal{
 		std::string tmp { text };
 		std::stringstream output;
 		timestamp = std::time(nullptr);
-		output << std::asctime(std::localtime(&timestamp));
+		formattedTime = std::localtime(&timestamp);
+		output << std::to_string(formattedTime->tm_hour) << std::to_string(formattedTime->tm_min);
 		output << text;
-		text = output.str().replace(output.str().find('\n'), 1, " [+] ");
+		// text = output.str().replace(output.str().find('\n'), 1, " [+] ");
+		text = output.str();
 	}
 
 	void print(void (*format) (std::string&), std::string& text) { 
