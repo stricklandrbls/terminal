@@ -2,6 +2,25 @@
 #include "../include/terminal.hpp"
 #include <sstream>
 
+CTerm& CTerm::Instance(){
+	static CTerm* _instance = new CTerm;
+	printf("Instance mem address: %p[%d]\n", _instance, _instance->isInitialized);
+	return *_instance;
+}
+
+void CTerm::init_logger(std::filesystem::path&& filename, std::filesystem::path&& storagePath){
+	CTerm::Instance().logFile 	= std::make_unique<path>( storagePath / filename );
+	CTerm::Instance().outStream = std::make_unique<std::ofstream>( storagePath / filename );
+	if( !CTerm::Instance().outStream->good() ){
+		printf("!! FATAL: Output stream could not be initialized.\n");
+		exit(1);
+	}
+}
+void CTerm::print(CTerm::LEVEL logLevel, std::string&& text){
+	printf("[%p] << %s\n", &(CTerm::Instance().outStream), text.c_str());
+	*CTerm::Instance().outStream << text;
+}
+
 namespace Terminal{
 
     std::time_t     timestamp;
@@ -22,18 +41,24 @@ namespace Terminal{
 		std::string tmp { text };
 		std::stringstream output;
 		timestamp = std::time(nullptr);
-		output << std::asctime(std::localtime(&timestamp));
+		formattedTime = std::localtime(&timestamp);
+		output 	<< std::to_string(formattedTime->tm_hour) 	<< ":"
+				<< std::to_string(formattedTime->tm_min)	<< ":"
+				<< std::to_string(formattedTime->tm_sec)	<< " [!] ";
 		output << text;
-		text = output.str().replace(output.str().find('\n'), 1, " [!] ");
+		text = output.str();
 	}
 
 	void info     (std::string& text) { 
 		std::string tmp { text };
 		std::stringstream output;
 		timestamp = std::time(nullptr);
-		output << std::asctime(std::localtime(&timestamp));
+		formattedTime = std::localtime(&timestamp);
+		output 	<< std::to_string(formattedTime->tm_hour) 	<< ":"
+				<< std::to_string(formattedTime->tm_min)	<< ":"
+				<< std::to_string(formattedTime->tm_sec)	<< " [ ] ";
 		output << text;
-		text = output.str().replace(output.str().find('\n'), 1, " [ ] ");
+		text = output.str();
 	}
 
 	void success  (std::string& text) { 
@@ -41,9 +66,10 @@ namespace Terminal{
 		std::stringstream output;
 		timestamp = std::time(nullptr);
 		formattedTime = std::localtime(&timestamp);
-		output << std::to_string(formattedTime->tm_hour) << std::to_string(formattedTime->tm_min);
+		output 	<< std::to_string(formattedTime->tm_hour) 	<< ":"
+				<< std::to_string(formattedTime->tm_min)	<< ":"
+				<< std::to_string(formattedTime->tm_sec)	<< " [+] ";
 		output << text;
-		// text = output.str().replace(output.str().find('\n'), 1, " [+] ");
 		text = output.str();
 	}
 
