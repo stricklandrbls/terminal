@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ln -s /usr/lib/terminal/libterminal.so /usr/lib/libterminal.so
-chmod -R 755 /usr/include/terminal
-chmod -R 755 /usr/lib/terminal
-chown -R root:root /usr/lib/terminal
-chown -R root:root /usr/lib/terminal
+ln -s /usr/lib/simpleLogger/libsimpleLogger.so /usr/lib/libsimpleLogger.so
+chmod -R 755 /usr/include/simpleLogger
+chmod -R 755 /usr/lib/simpleLogger
+chown -R root:root /usr/lib/simpleLogger
+chown -R root:root /usr/lib/simpleLogger

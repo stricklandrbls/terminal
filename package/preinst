@@ -1,14 +1,14 @@
 #!/bin/bash
 
-DIRINCLUDE=/usr/include/terminal
-DIRLIB=/usr/lib/terminal
+DIRINCLUDE=/usr/include/simpleLogger
+DIRLIB=/usr/lib/simpleLogger
 
-if [ -f "$DIRINCLUDE/terminal.hpp" ]; then
-    rm -rf $DIRINCLUDE/terminal.hpp
+if [ -f "$DIRINCLUDE/simpleLogger.hpp" ]; then
+    rm -rf $DIRINCLUDE/simpleLogger.hpp
 fi
-if [ -f "$DIRLIB/libterminal.so" ]; then
-    rm -rf $DIRLIB/libterminal.so
+if [ -f "$DIRLIB/libsimpleLogger.so" ]; then
+    rm -rf $DIRLIB/libsimpleLogger.so
 fi
-if [ -f "/usr/lib/libterminal.so" ]; then
-    rm -rf /usr/lib/libterminal.so
+if [ -f "/usr/lib/libsimpleLogger.so" ]; then
+    rm -rf /usr/lib/libsimpleLogger.so
 fi

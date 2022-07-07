@@ -1,5 +1,5 @@
 
-#include "../include/terminal.hpp"
+#include "../include/simpleLogger.hpp"
 
 Logger& Logger::Instance(){
 	static Logger* _instance = new Logger;
@@ -16,21 +16,21 @@ void Logger::init_logger(std::filesystem::path&& filename, std::filesystem::path
 }
 void Logger::print(Logger::LEVEL logLevel, std::string&& text){
 	Logger::Instance().levelMap[logLevel](text);
-	printf("[%p] << %s\n", &(Logger::Instance().outStream), text.c_str());
+	printf("[%p] << %s", &(Logger::Instance().outStream), text.c_str());
 	*Logger::Instance().outStream << text;
 }
 void Logger::print(Logger::LEVEL logLevel, std::string& text){
 	Logger::Instance().levelMap[logLevel](text);
-	printf("[%p] << %s\n", &(Logger::Instance().outStream), text.c_str());
+	printf("[%p] << %s", &(Logger::Instance().outStream), text.c_str());
 	*Logger::Instance().outStream << text;
 }
 void Logger::tprint(Logger::LEVEL logLevel, std::string&& text){
 	Logger::Instance().levelMap[logLevel](text);
-	printf("%s\n", text.c_str());
+	printf("%s", text.c_str());
 }
 void Logger::tprint(Logger::LEVEL logLevel, std::string& text){
 	Logger::Instance().levelMap[logLevel](text);
-	printf("%s\n", text.c_str());
+	printf("%s", text.c_str());
 }
 void Logger::err (std::string& text) { 
 	std::string tmp { text };
@@ -41,7 +41,7 @@ void Logger::err (std::string& text) {
 			<< std::to_string(formattedTime->tm_min)	<< ":"
 			<< std::to_string(formattedTime->tm_sec)	<< " [!] ";
 	output << text;
-	text = output.str();
+	text = output.str() + "\n";
 }
 
 void Logger::info (std::string& text) { 
@@ -53,7 +53,7 @@ void Logger::info (std::string& text) {
 			<< std::to_string(formattedTime->tm_min)	<< ":"
 			<< std::to_string(formattedTime->tm_sec)	<< " [ ] ";
 	output << text;
-	text = output.str();
+	text = output.str() + "\n";
 }
 
 void Logger::success (std::string& text) { 
@@ -65,7 +65,7 @@ void Logger::success (std::string& text) {
 			<< std::to_string(formattedTime->tm_min)	<< ":"
 			<< std::to_string(formattedTime->tm_sec)	<< " [+] ";
 	output << text;
-	text = output.str();
+	text = output.str() + "\n";
 }
 
 

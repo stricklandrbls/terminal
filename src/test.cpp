@@ -1,4 +1,4 @@
-#include "../include/terminal.hpp"
+#include "../include/simpleLogger.hpp"
 
 int main(){
     Logger::init_logger("Test.log", "./");
