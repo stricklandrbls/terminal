@@ -7,6 +7,8 @@
 #include <ctime>
 #include <map>
 #include <functional>
+#include <initializer_list>
+#include <iostream>
 
 using path = std::filesystem::path;
 
@@ -24,9 +26,12 @@ class Logger{
         static void init_logger (std::filesystem::path&& filename, std::filesystem::path&& storagePath);
         static void print       (Logger::LEVEL logLevel, std::string&& text);
         static void print       (Logger::LEVEL logLevel, std::string& text);
+        static void print       (Logger::LEVEL logLevel, std::initializer_list<std::string> texts);
         static void tprint      (Logger::LEVEL logLevel, std::string& text);
         static void tprint      (Logger::LEVEL logLevel, std::string&& text);
+        static void tprint      (Logger::LEVEL logLevel, std::initializer_list<std::string> texts);
 
+        // static void hexdump     (Logger::LEVEL logLevel, Object obj);
         static void close() { Logger::Instance().outStream->close(); }
         void toString()     { printf("\t-- CTERM INFO --\n\tlogFile[%p]: %s\n\toutStream[%p]\n", &logFile, logFile->string().c_str(), &outStream); }
     private:

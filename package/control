@@ -1,5 +1,5 @@
 Package: libsimpleLogger
-Version: 1.0
+Version: 1.1
 Architecture: amd64 
 Depends: libstdc++6, libgcc-s1, libc6
 Maintainer: Robert Strickland (robert.strickland@smartchain.community)

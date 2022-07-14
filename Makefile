@@ -1,7 +1,7 @@
 C=g++
 FLAGS=-Wall -shared -fpic
 LOCAL:=0
-VERSION=1.0
+VERSION=1.1
 RELEASE=1
 PACKAGE=libsimpleLogger_$(VERSION)-$(RELEASE)_amd64
 PACKAGELIBDIR=$(PACKAGE)/usr/lib/simpleLogger
@@ -47,7 +47,7 @@ clean:
 	@rm -f *.deb
 	@rm -f *.log
 	
-test: setup src/test.cpp
+test: clean setup src/test.cpp
 	$(C) -Wall src/libsimpleLogger.cpp src/test.cpp -o build/$@
 
 install:
