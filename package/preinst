@@ -10,5 +10,8 @@ if [ -f "$DIRLIB/libsimpleLogger.so" ]; then
     rm -rf $DIRLIB/libsimpleLogger.so
 fi
 if [ -f "/usr/lib/libsimpleLogger.so" ]; then
+    rm -rf /usr/include/libsimpleLogger.hpp
+fi
+if [ -h "/usr/lib/libsimpleLogger.so" ]; then
     rm -rf /usr/lib/libsimpleLogger.so
 fi
