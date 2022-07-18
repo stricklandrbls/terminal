@@ -47,6 +47,7 @@ To print log messages to the terminal, and/or log file, the following functions 
 | INFO | Holds function pointer to format the beginning of the log message w/ `00:00:00 [ ]` |
 | ERR | Holds function pointer to format the beginning of the log message w/ `00:00:00 [!]` |
 | SUCCESS | Holds function pointer to format the beginning of the log message w/ `00:00:00 [+]` |
+
 **Example**
 ```C++
 #include <simpleLogger/simpleLogger.hpp>
