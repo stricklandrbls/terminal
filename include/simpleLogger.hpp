@@ -33,7 +33,9 @@ class Logger{
 
         // static void hexdump     (Logger::LEVEL logLevel, Object obj);
         static void close() { Logger::Instance().outStream->close(); }
+#if DEBUG
         void toString()     { printf("\t-- CTERM INFO --\n\tlogFile[%p]: %s\n\toutStream[%p]\n", &logFile, logFile->string().c_str(), &outStream); }
+#endif
     private:
 
         Logger(){}

@@ -32,9 +32,9 @@ void Logger::print(Logger::LEVEL logLevel, std::initializer_list<std::string> it
 	Logger::Instance().levelMap[logLevel](outputText);
 	for(auto item : items)
 		tmp += item;
-	outputText = outputText + tmp;
+	outputText = outputText + tmp + "\n";
 
-	printf("%s\n", outputText.c_str());
+	printf("%s", outputText.c_str());
 	*Logger::Instance().outStream << outputText;
 }
 void Logger::tprint(Logger::LEVEL logLevel, std::string&& text){
